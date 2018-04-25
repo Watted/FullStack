@@ -23,7 +23,7 @@ function processInput2(input) {
 }*/
 
 
-var Users = {"username" : "wat",'pass':'sa'};
+var Users = [][3];
 var choice;
 userChoices();
 function userChoices() {
@@ -52,7 +52,15 @@ function userChoices() {
 }
 
 function deleteUser() {
-    var username = r1.question('Please enter the username to delete',(input)=>{
+    var username;
+    r1.question('Please enter the username to delete',(input)=>{
+        username = input;
+        for (var i =0 ;i<Users.length;i++){
+            //if (username === Users[i].username){
+                Users[i].pop();
+                console.log(Users);
+            //}
+        }
 
     });
     
