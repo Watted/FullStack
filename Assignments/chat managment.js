@@ -4,19 +4,68 @@ const r1 = readline.createInterface({
     output: process.stdout,
 });
 //direction to User.js
-const Users = require('./User');
-
+const User = require('./User');
+const Users = require('./Users');
 let users = new Users();
 
+var choice;
+main();
+function main(){
+    if (choice === 0) {
+        r1.close();
+    }
+    r1.question('1) Enter to create a user\n2) Enter to delete a user.\n', (input) => {
+        choice = parseInt(input);
+        switch (choice) {
+            case 0:
+                r1.close();
+                break;
+            case 1:
+                createUser();
+                break;
+            case 2:
+                deleteUser();
+                break;
+            default:
+                console.log("Wrong answer, please try again!!");
+                break;
+        }
+    main();
+    });
+}
+
+function createUser() {
+    var username, password, age;
+    r1.question('input your username: ', (input) => {
+        {
+            username = input;
+            r1.question('input your password: ', (input) => {
+                {
+                    password = input;
+                    r1.question('input your age: ', (input) => {
+                        {
+                            age = input;
+                            var user = new User(username,password,age);
+                            users.addUser(user);
+                            users.print();
+                            process.exit(1);
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
 
 
+/*
 function User(username,password,age) {
     this.username = username;
     this.password = password;
     this.age = age;
-}
+}*/
 
-User.prototype.createUser = function () {
+/*ser.prototype.createUser = function () {
     var username,password,age;
     r1.question('input your username: ',(input)=>{
         {
@@ -36,7 +85,7 @@ User.prototype.createUser = function () {
     });
 
 
-}
+}*/
 
 /*
 var Users = [][3];
