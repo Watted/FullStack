@@ -5,24 +5,18 @@ const r1 = readline.createInterface({
 });
 
 
-/*
-r1.question('input your selection: ',function (input) {
-   console.log('i got: ',input);
 
-});*/
-
-//r1.question('input your selection: ',processInput);
-
-/*function processInput1(input) {
-    console.log('i got: ', input);
-    return input;
+function User(username,password,age) {
+    this.username = username;
+    this.password = password;
+    this.age = age;
 }
-function processInput2(input) {
-    console.log('i got: ', input);
-    return input;
-}*/
 
+User.prototype.createUser = function () {
+    
+}
 
+/*
 var Users = [][3];
 var choice;
 userChoices();
@@ -101,4 +95,21 @@ function addUser(user) {
         Users.push(user);
     }
 
+}*/
+
+/*
+r1.question('input your selection: ',function (input) {
+   console.log('i got: ',input);
+
+});*/
+
+//r1.question('input your selection: ',processInput);
+
+/*function processInput1(input) {
+    console.log('i got: ', input);
+    return input;
 }
+function processInput2(input) {
+    console.log('i got: ', input);
+    return input;
+}*/
