@@ -3,6 +3,10 @@ const r1 = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
+//direction to User.js
+const Users = require('./User');
+
+let users = new Users();
 
 
 
@@ -13,7 +17,25 @@ function User(username,password,age) {
 }
 
 User.prototype.createUser = function () {
-    
+    var username,password,age;
+    r1.question('input your username: ',(input)=>{
+        {
+            username = input;
+            r1.question('input your password: ',(input)=>{
+                {
+                    password = input;
+                    r1.question('input your age: ',(input)=>{
+                        {
+                            age = input;
+                            return new User(username,password,age);
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+
 }
 
 /*
