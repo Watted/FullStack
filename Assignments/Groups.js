@@ -1,0 +1,4 @@
+function Groups() {
+    this.groups =[];
+
+}

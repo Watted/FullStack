@@ -17,8 +17,15 @@ Users.prototype.addUser = function(user) {
     }
 
 };
-Users.prototype.removeUser = function(user) {
-    //delete users[user];
+Users.prototype.removeUser = function(username) {
+    var flag=0;
+    for (var i = 0 ; i< this.users.length;i++){
+        if (this.users[i].getUsername() === username){
+            delete this.users[i];
+        }else{
+            console.log("The Username isn't exist!!");
+        }
+    }
 };
 
 Users.prototype.print = function() {
