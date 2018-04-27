@@ -8,10 +8,6 @@ User.prototype.getUsername = function () {
     return this.username;
 };
 
-User.prototype.setUsername = function(username) {
-    this.username = username;
-
-};
 
 
 module.exports = User;
