@@ -8,9 +8,11 @@ const User = require('./User');
 const Users = require('./Users');
 const Group = require('./Group');
 const Groups = require('./Groups');
+const UserToGroups = require('./UserToGroups');
 
 let users = new Users();
 let groups = new Groups();
+let userToGroups = new UserToGroups();
 var choice=1;
 
 menuOptions();
@@ -42,12 +44,64 @@ function menuOptions(){
             case 6:
                 printGroups();
                 break;
+            case 7:
+                addUserToGroup();
+                break;
+            case 8:
+                removeUserFromGroup();
+                break;
+            case 9:
+                printGroupUsers();
+                break;
             default:
                 console.log("Wrong answer, please try again!!");
                 menuOptions();
                 break;
         }
     }
+}
+
+function printGroupUsers() {
+    var user = [];
+    var nameGroup = '';
+    for (var i = 0; i< groups.getLength();i++){
+        nameGroup = groups.getName(i);
+        user = userToGroups.printGroupAndUsers(nameGroup);
+        for (var j =0; j<user.length;j++){
+            console.log(nameGroup);
+            console.log("\t"+''+user[j]+' ('+users.getUserAge(user[j])+')');
+        }
+    }
+    menuOptions();
+}
+
+function removeUserFromGroup() {
+    var nameOfGroup, username;
+    r1.question('input the username to delete: ',removeUser);
+    function removeUser(input) {
+        username = input;
+        r1.question('input the group name: ', groupName);
+    }
+    function groupName(input) {
+        nameOfGroup = input;
+        userToGroups.removeUserFromGroup(username,nameOfGroup);
+        menuOptions();
+    }
+}
+
+function addUserToGroup() {
+    var nameOfGroup, username;
+    r1.question('input the username: ',addUser);
+    function addUser(input) {
+        username = input;
+        r1.question('input the group name: ', addGroupName);
+    }
+    function addGroupName(input) {
+        nameOfGroup = input;
+        userToGroups.addUserToGroup(username,nameOfGroup);
+        menuOptions();
+    }
+
 }
 
 function printGroups() {

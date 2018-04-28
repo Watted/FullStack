@@ -8,6 +8,9 @@ User.prototype.getUsername = function () {
     return this.username;
 };
 
+User.prototype.getAge = function () {
+    return this.age;
+};
 
 
 module.exports = User;

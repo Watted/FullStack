@@ -2,7 +2,14 @@ const user = require('./User');
 function Users() {
     this.users = [];
 }
-
+Users.prototype.getUserAge = function(user) {
+    for (var i =0;i<this.users.length;i++){
+        if (this.users[i].getUsername()===user)
+        {
+            return this.users[i].getAge();
+        }
+    }
+};
 Users.prototype.addUser = function(user) {
     var flag=0;
     for (var i = 0 ; i< this.users.length;i++){

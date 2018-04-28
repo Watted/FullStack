@@ -1,8 +1,14 @@
 const group = require('./Group');
+const userToGroup = require('./UserToGroup');
 function Groups() {
     this.groups = [];
-
 }
+Groups.prototype.getName = function(i) {
+    return this.groups[i].getGroupName();
+};
+Groups.prototype.getLength = function(group) {
+  return this.groups.length;
+};
 Groups.prototype.addGroup = function(group) {
     var flag=0;
     for (var i = 0 ; i< this.groups.length;i++){
