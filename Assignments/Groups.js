@@ -3,6 +3,13 @@ const userToGroup = require('./UserToGroup');
 function Groups() {
     this.groups = [];
 }
+Groups.prototype.checkIfExist = function(name) {
+    for (var i = 0; i < this.groups.length;i++){
+        if (this.groups[i].getGroupName()===name){
+            return true;
+        }
+    }
+};
 Groups.prototype.getName = function(i) {
     return this.groups[i].getGroupName();
 };

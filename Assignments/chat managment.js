@@ -19,7 +19,9 @@ menuOptions();
 
 function menuOptions(){
     r1.question('0) Enter to exit\n1) Enter to create a user\n2) Enter to delete a user.\n3) Enter to print the list of users\n' +
-        '4) Enter to create a group\n5) Enter to delete a group\n6) Enter to print the list of groups\n', main)
+        '4) Enter to create a group\n5) Enter to delete a group\n6) Enter to print the list of groups\n' +
+        '7) Enter to add user to group\n8) Enter to remove user from group\n9) Enter to print all the users in the groups\n' +
+        '10) Enter to update user password and age\n', main)
     function main(input){
         choice = parseInt(input);
         switch (choice) {
@@ -53,6 +55,9 @@ function menuOptions(){
             case 9:
                 printGroupUsers();
                 break;
+            case 10:
+                updateUserOption();
+                break;
             default:
                 console.log("Wrong answer, please try again!!");
                 menuOptions();
@@ -60,16 +65,37 @@ function menuOptions(){
         }
     }
 }
+function updateUserOption() {
+    var username,age,password;
+    r1.question('input the username that you want to change it: ',updateUser);
+    function updateUser(input) {
+        username = input;
+        if (users.checkIfExist(username)){
+            r1.question('input a new password to change it: ', updatePassword);
+        }
+    }
+    function updatePassword(input) {
+        password = input;
+        r1.question('input your age: ',updateAge);
+    }
+    function updateAge(input) {
+        age = input;
+        users.updateUser(username,password,age);
+        menuOptions();
+    }
 
+}
 function printGroupUsers() {
     var user = [];
-    var nameGroup = '';
+    var nameGroup;
     for (var i = 0; i< groups.getLength();i++){
         nameGroup = groups.getName(i);
         user = userToGroups.printGroupAndUsers(nameGroup);
+        console.log(nameGroup);
         for (var j =0; j<user.length;j++){
-            console.log(nameGroup);
-            console.log("\t"+''+user[j]+' ('+users.getUserAge(user[j])+')');
+            if (users.checkIfExist(user[j])) {
+                console.log("\t" + '' + user[j] + ' (' + users.getUserAge(user[j]) + ')');
+            }
         }
     }
     menuOptions();
@@ -94,11 +120,22 @@ function addUserToGroup() {
     r1.question('input the username: ',addUser);
     function addUser(input) {
         username = input;
-        r1.question('input the group name: ', addGroupName);
+        if (users.checkIfExist(username)) {
+            r1.question('input the group name: ', addGroupName);
+        }else{
+            console.log("there isn't user name like: "+username);
+            console.log('please try again\n');
+            menuOptions();
+        }
     }
     function addGroupName(input) {
         nameOfGroup = input;
-        userToGroups.addUserToGroup(username,nameOfGroup);
+        if (groups.checkIfExist(nameOfGroup)) {
+            userToGroups.addUserToGroup(username, nameOfGroup);
+        }else{
+            console.log("there isn't group name like: "+ nameOfGroup);
+            console.log('please try again\n');
+        }
         menuOptions();
     }
 

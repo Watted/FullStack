@@ -2,6 +2,26 @@ const user = require('./User');
 function Users() {
     this.users = [];
 }
+Users.prototype.updateUser = function(username,password,age) {
+    for (var i =0;i<this.users.length;i++){
+        if (this.users[i].getUsername()===username)
+        {
+            this.users[i].setPassword(password);
+            this.users[i].setAge(age);
+            console.log('Update complete\n');
+            break;
+        }
+    }
+};
+
+Users.prototype.checkIfExist = function(username) {
+    for (var i =0;i<this.users.length;i++){
+        if (this.users[i].getUsername()===username)
+        {
+            return true;
+        }
+    }
+};
 Users.prototype.getUserAge = function(user) {
     for (var i =0;i<this.users.length;i++){
         if (this.users[i].getUsername()===user)
