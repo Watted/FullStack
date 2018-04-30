@@ -25,9 +25,3 @@ module.exports = User;
 
 
 
-/*//private methods
-function createUser(username,password,age) {
-    username =  username;
-    password = password;
-    age = age;
-}*/

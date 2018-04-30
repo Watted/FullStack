@@ -1,4 +1,4 @@
-const user = require('./User');
+const User = require('./User');
 function Users() {
     this.users = [];
 }
@@ -21,6 +21,7 @@ Users.prototype.checkIfExist = function(username) {
             return true;
         }
     }
+    return false;
 };
 Users.prototype.getUserAge = function(user) {
     for (var i =0;i<this.users.length;i++){
@@ -30,7 +31,8 @@ Users.prototype.getUserAge = function(user) {
         }
     }
 };
-Users.prototype.addUser = function(user) {
+Users.prototype.addUser = function(username, password, age) {
+    var user = new User(username, password, age);
     var flag=0;
     for (var i = 0 ; i< this.users.length;i++){
         if (this.users[i].getUsername() === user.getUsername()){
@@ -39,7 +41,7 @@ Users.prototype.addUser = function(user) {
     }
     if (flag===0) {
         this.users.push(user);
-        console.log('user created\n');
+        console.log('name created\n');
     }else{
         console.log("The username is already exist!");
     }
@@ -51,7 +53,7 @@ Users.prototype.removeUser = function(username) {
         if (this.users[i].getUsername() === username){
             flag=1;
             this.users.splice(i, 1);
-            console.log('the user removed\n');
+            console.log('the name removed\n');
             break;
         }
     }
@@ -61,8 +63,12 @@ Users.prototype.removeUser = function(username) {
 };
 
 Users.prototype.print = function() {
-    for (var i = 0; i<this.users.length;i++){
-        console.log(this.users[i].getUsername());
+    if (this.users.length) {
+        for (var i = 0; i < this.users.length; i++) {
+            console.log(this.users[i].getUsername());
+        }
+    }else{
+        console.log("There is not users in the list\n");
     }
 };
 
