@@ -4,7 +4,7 @@ const r1 = readline.createInterface({
     output: process.stdout
 });
 
-const AllGroupsAndUsers = require('./AllGroupsAndUsers');
+const AllGroupsAndUsers = require('./Tree');
 let allGroupsAndUsers = new AllGroupsAndUsers();
 
 var choice=1;

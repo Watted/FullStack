@@ -1,16 +1,18 @@
 const Group = require('./Group');
+const User = require('./User');
+
 
 class Node {
     constructor(groupOrUser){
         this.node = groupOrUser;
-        this.next =[];
+        this.parent = null;
+        this.children =[];
+
     }
-    addNode(node,nodeToPut){
-        if (node){
-            if (node) 
-        } 
+    addNode(node1) {
+       this.next.push(node1);
     }
-    
+
 
 
 }
