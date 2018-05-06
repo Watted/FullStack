@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="test.js.js"></script>
+    <script src="test.js"></script>
 </head>
 <body>
 
@@ -17,6 +17,19 @@
             ssdf
         </div>
     </div>
+</div>
+
+
+<div class="bulbs">
+    <div class="circle" data-type="one"></div>
+    <div class="circle" data-type="one"></div>
+    <div class="circle" data-type="one"></div>
+    <div class="circle" data-type="one"></div>
+    <div class="circle" data-type="one"></div>
+    <div class="circle" data-type="one"></div>
+    <div class="circle" data-type="one"></div>
+    <div class="circle" data-type="one"></div>
+    <div class="circle" data-type="one"></div>
 </div>
 
 <input type="text" id="myInput2" class="lite-red"/>
@@ -41,6 +54,17 @@
 
 
 <style>
+    .circle {
+        border: 1px solid #000;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        margin: 10px;
+        display: inline-block;
+    }
+    .circle.active {
+        background-color: yellow;
+    }
     ul {
         border: 1px solid red;
     }

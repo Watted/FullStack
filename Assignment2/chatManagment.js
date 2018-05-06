@@ -3,9 +3,12 @@ const r1 = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-
-const AllGroupsAndUsers = require('./Tree');
-let allGroupsAndUsers = new AllGroupsAndUsers();
+//direction to User.js
+const Users = require('./Users');
+const User = require('./User');
+const Tree = require('./Tree');
+let users = new Users();
+let groups = null;
 
 var choice=1;
 
@@ -14,7 +17,7 @@ menuOptions();
 function menuOptions(){
     r1.question('0) Enter 0 to exit\n1) Enter 1 to create a name\n2) Enter 2 to delete a name.\n3) Enter 3 to print the list of users\n' +
         '4) Enter 4 to create a group\n5) Enter 5 to delete a group\n6) Enter 6 to print the list of groups\n' +
-        '7) Enter 7 to add name to group\n8) Enter 8 to remove name from group\n9) Enter 9 to print all the users in the groups\n' +
+        '7) Enter 7 to add name to group\n8) Enter 8 to remove name from group\n9) Enter 9 to flattening all the group\n' +
         '10) Enter 10 to update name password and age\n', main);
     function main(input){
         choice = parseInt(input);
@@ -47,7 +50,7 @@ function menuOptions(){
                 removeUserFromGroup();
                 break;
             case 9:
-                printGroupUsers();
+                flatteningGroupUsers();
                 break;
             case 10:
                 updateUserOption();
@@ -80,21 +83,15 @@ function updateUserOption() {
     function updateAge(input) {
         age = input;
         users.updateUser(username,password,age);
-        groups.updateAge(username,age);
         menuOptions();
     }
 
 }
-function printGroupUsers() {
-    var length = groups.getLength();
-    if (length !== 0) {
-        groups.printGroupAndUsers();
-    }else{
-        console.log("There were no existing groups\n");
-    }
+
+function flatteningGroupUsers() {
+    groups.flatting(groups.traverseBF);
     menuOptions();
 }
-
 function removeUserFromGroup() {
     var nameOfGroup, username;
     r1.question('input the username to delete: ',removeUser);
@@ -110,22 +107,18 @@ function removeUserFromGroup() {
     }
     function groupName(input) {
         nameOfGroup = input;
-        if (groups.checkIfExist(nameOfGroup)) {
-            groups.removeUserFromGroup(username, nameOfGroup);
-        }else {
-            console.log("there was no group name like: "+ nameOfGroup);
-            console.log('please try again\n');
-        }
+        groups.removeUserFromGroup(username, nameOfGroup,groups.traverseBF);
         menuOptions();
     }
 }
 
+
 function addUserToGroup() {
-    var nameOfGroup, username;
+    var nameOfGroup, username,user;
     r1.question('input the username: ',addUser);
     function addUser(input) {
         username = input;
-        if (users.checkIfExist(username)) {
+        if (user = users.checkIfExist(username)) {
             r1.question('input the group name: ', addGroupName);
         }else{
             console.log("there was no username like: "+username);
@@ -135,68 +128,13 @@ function addUserToGroup() {
     }
     function addGroupName(input) {
         nameOfGroup = input;
-        if (groups.checkIfExist(nameOfGroup)) {
-            groups.addUserToGroup(username, users.getUserAge(username),nameOfGroup);
-        }else{
-            console.log("there was no group name like: "+ nameOfGroup);
-            console.log('please try again\n');
-        }
+        groups.addUserToGroup(user,nameOfGroup,groups.traverseBF);
         menuOptions();
     }
 
 }
 
-function printGroups() {
-    allGroupsAndUsers.printGroup();
-    menuOptions();
-}
-
-function deleteGroup() {
-    var groupName;
-    r1.question('input the group name to delete: ',groupToDelete);
-    function groupToDelete(input) {
-        groupName = input;
-        groups.removeGroup(groupName);
-        menuOptions();
-
-    }
-}
-//finish
-function createGroup() {
-    var nameOfGroup;
-    r1.question('input the first  group name: ', addGroupName);
-    function addGroupName(input) {
-        nameOfGroup = input;
-        if (allGroupsAndUsers.checkIfRootNull()) {
-            allGroupsAndUsers.addGroup(nameOfGroup,null);
-            menuOptions();
-        }else{
-            r1.question('Where do you wanna put the new group, \nplease input another group name to putted under it: ', addGroupNameUnderAnother);
-        }
-    }
-    function addGroupNameUnderAnother(input) {
-        var anothergroup = input;
-        allGroupsAndUsers.addGroup(nameOfGroup,anothergroup);
-        menuOptions();
-    }
-}
-
-function deleteUser() {
-    var username;
-    r1.question('input the username to delete: ',usernameToDelete);
-    function usernameToDelete(input) {
-        username = input;
-        users.removeUser(username);
-        groups.removeUserFromGroup(username,'allGroups');
-        menuOptions();
-
-    }
-}
-
-function printUsernames() {
-    users.print();
-    menuOptions();
-}
+/////////////////////////////////
 function createUser() {
     var username, password, age;
     r1.question('input your username: ', passwordQuestion);
@@ -216,5 +154,77 @@ function createUser() {
         users.addUser(username, password, age);
         menuOptions();
     }
+}
+function deleteUser() {
+    var username;
+    r1.question('input the username to delete: ',usernameToDelete);
+    function usernameToDelete(input) {
+        username = input;
+        users.removeUser(username);
+        //groups.removeUserFromGroup(username,'allGroups');
+        menuOptions();
+
+    }
+}
+function printUsernames() {
+    users.print();
+    menuOptions();
+}
+function deleteGroup() {
+    var groupName;
+    r1.question('input the group name to delete: ',groupToDelete);
+    function groupToDelete(input) {
+        groupName = input;
+        if (groups.getLength()>0){
+            r1.question('input another group that the first one exist under it: ',parentGroup);
+        } else {
+            if (groups.checkTheRootIfExist(groupName)){
+                groups = null;
+            }
+        }
+        menuOptions();
+    }
+    function parentGroup(input) {
+        var parent = input;
+        groups.remove(groupName,parent,groups.traverseBF);
+        menuOptions();
+    }
+
+}
+/////////////////////////////////////////////////////////
+function createGroup() {
+    var nameOfGroup;
+    r1.question('input the group name: ', addGroupName);
+
+    function addGroupName(input) {
+        nameOfGroup = input;
+        if (groups === null) {
+            groups = new Tree(nameOfGroup);
+            menuOptions();
+        }
+        else{
+            r1.question('please input name of group to putted under it: ',parentGroup );
+        }
+    }
+    function parentGroup(input) {
+        var parent = input;
+        groups.add(nameOfGroup,parent,groups.traverseBF);
+        menuOptions();
+    }
+}
+function printGroups() {
+
+    if (groups!==null) {
+        groups.traverseBF(function (node) {
+            if (node instanceof User) {
+                console.log(node.getName());
+            }else {
+                console.log(node.getNameOfData()+' ('+node.getLength()+')');
+            }
+        });
+    }else {
+        console.log("There no group in the list!!");
+    }
+    menuOptions();
 
 }
