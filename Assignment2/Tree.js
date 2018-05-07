@@ -125,8 +125,12 @@ class Tree {
         this.contains(callback, traversal);
 
         if (parent) {
-            parent.setChild(child);
-            child.setParent(parent);
+            if (!parent.checkIfExist(child.getNameOfData())){
+                parent.setChild(child);
+                child.setParent(parent);
+            }else {
+                console.log('Cannot add this group, There is group name like it.');
+            }
         } else {
             console.log('Cannot add group to a non-existent group.');
         }

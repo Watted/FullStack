@@ -30,6 +30,17 @@ class Node {
     setChild(child){
         this.children.push(child);
     }
+    checkIfExist(child){
+        if (child === this.data.getName()){
+            return true;
+        }
+        for (var i =0; i<this.children.length;i++){
+            if (child === this.children[i].data.getName()){
+                return true;
+            }
+        }
+        return false;
+    }
     setChildUser(user){
         this.children.push(user);
     }
