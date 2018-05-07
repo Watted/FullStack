@@ -125,9 +125,22 @@ class Tree {
         this.contains(callback, traversal);
 
         if (parent) {
+            /////////
             if (!parent.checkIfExist(child.getNameOfData())){
-                parent.setChild(child);
-                child.setParent(parent);
+                if ( !parent.checkIfUser()) {
+                    parent.setChild(child);
+                    child.setParent(parent);
+                }else {
+                    var children = parent.getChildren();
+                    parent.removeAllChildren();
+                    this.add("other", parent.getNameOfData(), this.traverseBF);
+                    parent.setChild(child);
+                    child.setParent(parent);
+                    parent = parent.getChildOthers();
+                    for (var i =0 ;i<children.length;i++) {
+                        parent.setChild(children[i]);
+                    }
+                }
             }else {
                 console.log('Cannot add this group, There is group name like it.');
             }
