@@ -7,36 +7,7 @@ class Tree {
 
         this._root =  new Node(data);
     }
-    removeUserFromGroup(data, nameOfGroup,traversal){
-        var tree = this,
-            parent = null,
-            childToRemove = null,
-            index;
 
-        var callback = function(node) {
-            if (node instanceof User){
-
-            }else if (node.getNameOfData() === nameOfGroup) {
-                parent = node;
-            }
-        };
-
-        this.contains(callback, traversal);
-
-        if (parent) {
-            index = this.findIndex(parent.getChildren(), data);
-
-            if (index === undefined) {
-                console.log('User to remove does not exist in this group.');
-            } else {
-                childToRemove = parent.removeChildren(index);
-            }
-        } else {
-            console.log('Group does not exist');
-        }
-
-        return childToRemove;
-    }
 
     flatting(traversal){
         var tree = this,
@@ -146,24 +117,7 @@ class Tree {
             console.log('Cannot add group to a non-existent group.');
         }
     }
-    traverseDF(callback) {
 
-        // this is a recurse and immediately-invoking function
-        (function recurse(currentNode) {
-            // step 2
-            for (var i = 0; i < currentNode.getLength(); i++) {
-
-                // step 3
-                recurse(currentNode.getChild(i));
-            }
-
-            // step 4
-            callback(currentNode);
-
-            // step 1
-        })(this._root);
-
-    }
     traverseBF(callback) {
         var queue = new Queue();
 
@@ -215,7 +169,7 @@ class Tree {
             index = this.findIndex(parent.getChildren(), data);
 
             if (index === undefined) {
-                console.log('group to remove does not exist.');
+                console.log('group/User to remove does not exist.');
             } else {
                 childToRemove = parent.removeChildren(index);
             }
@@ -225,6 +179,8 @@ class Tree {
 
         return childToRemove;
     }
+
+
 
     findIndex(arr, data) {
         var index;

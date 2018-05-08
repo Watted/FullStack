@@ -14,10 +14,7 @@ class Node {
     getParent(){
         return this.parent;
     }
-    getData()
-    {
-        return this.data;
-    }
+
     getNameOfData(){
         return this.data.getName();
     }
@@ -64,9 +61,7 @@ class Node {
     setParent(parent){
         this.parent = parent;
     }
-    setChildren(arr){
-        this.children = arr;
-    }
+
     getChildren(){
         return this.children;
     }

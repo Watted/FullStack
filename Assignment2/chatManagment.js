@@ -107,7 +107,7 @@ function removeUserFromGroup() {
     }
     function groupName(input) {
         nameOfGroup = input;
-        groups.removeUserFromGroup(username, nameOfGroup,groups.traverseBF);
+        groups.remove(username, nameOfGroup,groups.traverseBF);
         menuOptions();
     }
 }
