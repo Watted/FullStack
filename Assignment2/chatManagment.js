@@ -181,8 +181,8 @@ function deleteGroup() {
             if (groups.checkTheRootIfExist(groupName)){
                 groups = null;
             }
+            menuOptions();
         }
-        menuOptions();
     }
     function parentGroup(input) {
         var parent = input;
