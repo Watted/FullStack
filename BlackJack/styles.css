@@ -1,11 +1,10 @@
-html {
+html{
     height: 100%;
 }
-
-body {
+body{
     background: rgba(30,66,0,1);
-    background: -moz-linear-gradient(top, rgba(30,66,0,1) 0%, rgba(35,161,16,1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(30,66,0,1)), color-stop(100%, rgba(35,161,16,1)));
+    background: -moz-linear-gradient(top, rgba(30,66,0,1) 0%,rgba(35,161,16,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(30,66,0,1)), color-stop(100%,rgba(35,161,16,1)));
     background: -webkit-linear-gradient(top, rgba(30,66,0,1) 0%, rgba(35,161,16,1) 100%);
     background: -o-linear-gradient(top, rgba(30,66,0,1) 0%, rgba(35,161,16,1) 100%);
     background: -ms-linear-gradient(top, rgba(30,66,0,1) 0%, rgba(35,161,16,1) 100%);
@@ -13,75 +12,19 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e4200', endColorstr='#23a110', GradientType=0 );
     min-height: 100%;
 }
-
-#table {
+#table{
     position: relative;
     padding-top: 20px;
 }
-
-#dealer{
-    box-sizing: border-box;
-    padding-left:154px;
-}
-
-.container {
+.container{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
     height: 214px;
     position: relative;
-    width:100%;
+    width: 100%;
 }
-
-#deck{
-    top:55px;
-    left:15px;
-    z-index: 10;
-    position: absolute;
-    width: 120px;
-    height: 180px;
-    border-radius: 5px;
-    padding:2px;
-    background-color: #F6F7EB;
-    display: block;
-    -webkit-box-shadow: 2px -2px 9px -1px rgba(0,0,0,1);
-    -moz-box-shadow: 2px -2px 9px -1px rgba(0,0,0,1);
-    box-shadow: 2px -2px 9px -1px rgba(0,0,0,1);
-}
-
-.card {
-    font-family: 'Arbutus Slab', serif;
-    position: relative;
-    width: 120px;
-    height: 180px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 28px;
-    padding:2px;
-    background-color: #F6F7EB;
-    display: flex;
-    -webkit-box-shadow: 2px -2px 9px -1px rgba(0,0,0,1);
-    -moz-box-shadow: 2px -2px 9px -1px rgba(0,0,0,1);
-    box-shadow: 2px -2px 9px -1px rgba(0,0,0,1);
-    margin:15px;
-}
-
-.back {
-    background: #36c;
-    background:
-            linear-gradient(115deg, transparent 75%, rgba(255,255,255,.8) 75%) 0 0,
-            linear-gradient(245deg, transparent 75%, rgba(255,255,255,.8) 75%) 0 0,
-            linear-gradient(115deg, transparent 75%, rgba(255,255,255,.8) 75%) 7px -15px,
-            linear-gradient(245deg, transparent 75%, rgba(255,255,255,.8) 75%) 7px -15px,
-            #36c;
-    background-size: 15px 30px;
-    width:96%;
-    height: 98%;
-    margin: 1% auto;
-    border-radius: 5px;
-}
-
 .diamonds, .hearts {
     color:#E94F37;
 }
@@ -89,7 +32,6 @@ body {
 .spades, .clubs {
     color:#393E41;
 }
-
 .rank {
     position: absolute;
     width:30px;
@@ -108,10 +50,9 @@ body {
 }
 
 .suit {
-    margin:auto;
+    margin: auto;
     font-size: 60px;
 }
-
 .border-line {
     border:4px dashed #F6F7EB;
     opacity: 0.4;
@@ -148,8 +89,6 @@ body {
     opacity: 0.7;
     font-size: 20px;
 }
-
-/* buttons */
 button {
     border:none;
     border-radius: 5px;
@@ -169,34 +108,32 @@ button:active {
     -webkit-transform: translate(0px, 5px);
     box-shadow: 0px .5px 0px 0px;
 }
-
-.blue {
+.btnDeal {
     background-color: #55acee;
     box-shadow: 0px 5px 0px 0px #3C93D5;
 }
 
-.blue:hover {
+.btnDeal:hover {
     background-color: #6FC6FF;
 }
 
-.green {
+.btnHit {
     background-color: #2ecc71;
     box-shadow: 0px 5px 0px 0px #15B358;
 }
 
-.green:hover {
+.btnHit:hover {
     background-color: #48E68B;
 }
 
-.red {
+.btnStand {
     background-color: #e74c3c;
     box-shadow: 0px 5px 0px 0px #CE3323;
 }
 
-.red:hover {
+.btnStand:hover {
     background-color: #FF6656;
 }
-
 button:disabled {
     background-color: #999;
     box-shadow: 0px 5px 0px 0px #AAA;
@@ -211,3 +148,4 @@ button:disabled:active {
     -webkit-transform: translate(0px, 0px);
     box-shadow: 0px 5px 0px 0px #AAA;
 }
+

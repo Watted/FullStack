@@ -6,7 +6,7 @@ class Groups {
 
     printGroupAndUsers() {
         for (var i = 0; i < this.groups.length; i++) {
-            console.log(this.groups[i].getGroupName());
+            console.log(this.groups[i].getName());
             this.groups[i].printAllUsers();
         }
     }
@@ -19,7 +19,7 @@ class Groups {
 
     addUserToGroup(username, age, groupName) {
         for (var i = 0; i < this.groups.length; i++) {
-            if (this.groups[i].getGroupName() === groupName) {
+            if (this.groups[i].getName() === groupName) {
                 if (this.groups[i].checkIfExist(username)) {
                     console.log("The username is already exist in the same group!");
                 } else {
@@ -34,7 +34,7 @@ class Groups {
     removeUserFromGroup(username, groupName) {
         if (groupName !== 'allGroups') {
             for (var i = 0; i < this.groups.length; i++) {
-                if (this.groups[i].getGroupName() === groupName) {
+                if (this.groups[i].getName() === groupName) {
                     if (this.groups[i].removeUser(username)) {
                         console.log('the name removed from the group\n');
                     } else {
@@ -55,14 +55,14 @@ class Groups {
 
     checkIfExist(name) {
         for (var i = 0; i < this.groups.length; i++) {
-            if (this.groups[i].getGroupName() === name) {
+            if (this.groups[i].getName() === name) {
                 return true;
             }
         }
     }
 
     getName(i) {
-        return this.groups[i].getGroupName();
+        return this.groups[i].getName();
     }
 
     getLength(group) {
@@ -73,7 +73,7 @@ class Groups {
         var group = new Group(nameOfGroup);
         var flag = 0;
         for (var i = 0; i < this.groups.length; i++) {
-            if (this.groups[i].getGroupName() === group.getGroupName()) {
+            if (this.groups[i].getName() === group.getGroupName()) {
                 flag = 1;
             }
         }
@@ -89,7 +89,7 @@ class Groups {
     removeGroup(group) {
         var flag = 0;
         for (var i = 0; i < this.groups.length; i++) {
-            if (this.groups[i].getGroupName() === group) {
+            if (this.groups[i].getName() === group) {
                 flag = 1;
                 this.groups.splice(i, 1);
                 console.log('the group removed\n');
@@ -104,7 +104,7 @@ class Groups {
     print() {
         if (this.groups.length) {
             for (var i = 0; i < this.groups.length; i++) {
-                console.log(this.groups[i].getGroupName());
+                console.log(this.groups[i].getName());
             }
         } else {
             console.log("There is no existing group\n");

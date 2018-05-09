@@ -6,7 +6,7 @@ class Users {
 
     updateUser(username, password, age) {
         for (var i = 0; i < this.users.length; i++) {
-            if (this.users[i].getUsername() === username) {
+            if (this.users[i].getName() === username) {
                 this.users[i].setPassword(password);
                 this.users[i].setAge(age);
                 console.log('Update complete\n');
@@ -17,7 +17,7 @@ class Users {
 
     checkIfExist(username) {
         for (var i = 0; i < this.users.length; i++) {
-            if (this.users[i].getUsername() === username) {
+            if (this.users[i].getName() === username) {
                 return true;
             }
         }
@@ -26,7 +26,7 @@ class Users {
 
     getUserAge(user) {
         for (var i = 0; i < this.users.length; i++) {
-            if (this.users[i].getUsername() === user) {
+            if (this.users[i].getName() === user) {
                 return this.users[i].getAge();
             }
         }
@@ -36,7 +36,7 @@ class Users {
         var user = new User(username, password, age);
         var flag = 0;
         for (var i = 0; i < this.users.length; i++) {
-            if (this.users[i].getUsername() === user.getUsername()) {
+            if (this.users[i].getName() === user.getUsername()) {
                 flag = 1;
             }
         }
@@ -52,7 +52,7 @@ class Users {
     removeUser(username) {
         var flag = 0;
         for (var i = 0; i < this.users.length; i++) {
-            if (this.users[i].getUsername() === username) {
+            if (this.users[i].getName() === username) {
                 flag = 1;
                 this.users.splice(i, 1);
                 console.log('the name removed\n');
@@ -67,7 +67,7 @@ class Users {
     print() {
         if (this.users.length) {
             for (var i = 0; i < this.users.length; i++) {
-                console.log(this.users[i].getUsername());
+                console.log(this.users[i].getName());
             }
         } else {
             console.log("There is not users in the list\n");
