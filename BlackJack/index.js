@@ -1,4 +1,4 @@
-var BlackjackJS = (function() {
+var BlackjackJS = (function($) {
 
     /**************
      Card class
@@ -215,9 +215,9 @@ var BlackjackJS = (function() {
 
                 } else if (this.player1.getScore() > this.player2.getScore() && this.player1.getScore() <= 21 && this.player2.getScore() < 21) {
                     this.gameEnded('player1 won!');
-
+                }else {
+                    this.gameEnded('Equals');
                 }
-                //TODO needs to be expanded..
 
             }
         };
@@ -225,14 +225,14 @@ var BlackjackJS = (function() {
             Initialise
         */
         this.init = function(){
-            this.player1Score = document.getElementById('player1-score').getElementsByTagName("span")[0];
-            this.player2Score = document.getElementById('player2-score').getElementsByTagName("span")[0];
-            this.dealButton = document.getElementById('deal');
-            this.hitButton = document.getElementById('hit');
-            this.standButton = document.getElementById('stand');
+            this.player1Score = document.getElementById('player1-score').getElementsByTagName('span')[0];
+            this.player2Score =  document.getElementById('player2-score').getElementsByTagName('span')[0];
+            this.dealButton =  document.getElementById('deal');
+            this.hitButton =  document.getElementById('hit');
+            this.standButton =  document.getElementById('stand');
 
             //attaching event handlers
-            this.dealButton.addEventListener('click', this.dealButtonHandler.bind(this));
+            this.dealButton.addEventListener("click", this.dealButtonHandler.bind(this));
             this.hitButton.addEventListener('click', this.hitButtonHandler.bind(this));
             this.standButton.addEventListener('click', this.standButtonHandler.bind(this));
 
@@ -291,4 +291,4 @@ var BlackjackJS = (function() {
         init: Game.init.bind(Game)
     }
 
-})();
+})(jQuery);
