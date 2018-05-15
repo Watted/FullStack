@@ -12,12 +12,27 @@ module.exports = (function () {
         User: {
             createOrUpdate: 'enter user details with this format: USERNAME,AGE,PASSWORD: ',
             remove: 'enter username to remove: '
+
         },
-        Group: {
+        Group:{
             create: 'enter group name to add: ',
-            remove: 'enter group name to remove: ',
-            assignUserToGroup: 'enter user to add to group like USERNAME,GROUP: ',
-            removeUserFromGroup: 'enter user to remove from group like USERNAME,GROUP: '
+            assignUserToGroup: 'enter username to add to group: ',
+            removeUserFromGroup: 'enter username to remove from group: ',
+            searchForGroup: 'enter group name to search for: ',
+            searchForUser: 'enter username to search for: '
+        },
+        Tree:{
+            addGroup: '[u] Add Group',
+            removeGroup: '[i] Remove Group',
+            addUser: '[o] Add User',
+            removeUser: '[p] Remove User',
+            mainMenu: '[c] Main Menu',
+            searchUser: '[y] Search User',
+            searchGroup: '[t] Search Group',
+            menu: '[r] Back to Full Tree',
+            flatten: '[e] Flatten the Group',
+            down: '[.] Down',
+            up: '[,] Up'
         },
         general: {
             choose: 'Choose the action by number:',
@@ -27,35 +42,29 @@ module.exports = (function () {
     };
 
     // static methods
-    Utils.printMainMenu = function () {
+    Utils.printMainMenu= function () {
+        console.clear();
         console.log('');
         console.log('=== Available Actions ===');
         console.log('1. Users Management');
         console.log('2. Groups Management');
-        console.log('3. User To Group Association');
-        console.log('4. Exit');
+        console.log('3. Exit');
     };
 
     Utils.interactWithUser = interactWithUser;
+    Utils.getStringByPath = getStringByPath;
     Utils.printDoneMessage = printDoneMessage;
-
-    Utils.printUsersToGroupMenu = function () {
-        console.log('');
-        console.log('=== User association Management ===');
-        console.log('1. Add user to group');
-        console.log('2. Remove user from group');
-        console.log('3. List groups and associated users');
-        console.log('4. Back');
-    };
 
     // public methods
     Utils.prototype = {
         printTypeMenu,
-        interactWithUser
+        interactWithUser,
+        getStringByPath
     };
 
     // private methods
     function printTypeMenu() {
+        console.clear();
         console.log('');
         console.log('=== ' + this._type + ' Management ===');
         console.log('1. Create ' + ((this._type === 'User') ? 'or Update ' + this._type : this._type));
@@ -71,7 +80,8 @@ module.exports = (function () {
     }
 
     function getStringByPath(path, type) {
-        if (type && path && Utils.stringsResource[type]) {
+        type = type || this._type;
+        if(type && path && Utils.stringsResource[type]){
             return Utils.stringsResource[type][path];
         }
         else {
@@ -86,3 +96,6 @@ module.exports = (function () {
 
     return Utils;
 })();
+
+
+
