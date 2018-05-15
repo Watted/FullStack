@@ -1,10 +1,13 @@
 function ChatTree(element) {
     function load(items) {
-        console.log(element);
+        for (let item of items){
+            let x = document.createElement("li").value = item["name"];
+            element.append(x);
+        }
     }
 
     function clear() {
-
+        element = ''
     }
 
     return {
