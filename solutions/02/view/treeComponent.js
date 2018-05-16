@@ -130,7 +130,7 @@ module.exports = (function () {
     }
 
     function _printMenu() {
-        console.clear();
+       // console.clear();
 
         let currentGroup = this._getCurrentGroup();
         let dynamicOptions = [];

@@ -43,7 +43,7 @@ module.exports = (function () {
 
     // static methods
     Utils.printMainMenu= function () {
-        console.clear();
+//        console.clear();
         console.log('');
         console.log('=== Available Actions ===');
         console.log('1. Users Management');
@@ -64,7 +64,7 @@ module.exports = (function () {
 
     // private methods
     function printTypeMenu() {
-        console.clear();
+        //console.clear();
         console.log('');
         console.log('=== ' + this._type + ' Management ===');
         console.log('1. Create ' + ((this._type === 'User') ? 'or Update ' + this._type : this._type));
