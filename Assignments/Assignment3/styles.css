@@ -35,3 +35,13 @@ html, body {
     list-style: none;
     outline: none;
 }
+
+/*
+.childElement.isHidden{
+    display: none;
+}
+*/
+
+.active {
+    background-color: #3C93D5;
+}

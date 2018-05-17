@@ -14,7 +14,7 @@ function ChatTree(element) {
             li.append('&nbsp;'.repeat(numberOfSpaces) + item.name);
             li.appendTo(element);
             li.click(() => {
-                console.log("heehe");
+                $(this).classList.toggle('active');
             });
 
             li.dblclick(() => {
