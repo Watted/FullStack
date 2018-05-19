@@ -9,6 +9,7 @@
   "dependencies": {
     "colors": "^1.2.5",
     "http-server": "^0.11.1",
+    "jQuery": "^1.7.4",
     "opener": "^1.4.3"
   }
 }

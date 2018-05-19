@@ -1,12 +1,12 @@
 html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-}
+     margin: 0;
+     padding: 0;
+     width: 100%;
+     height: 100%;
+     box-sizing: border-box;
+     display: flex;
+     flex-direction: row;
+ }
 
 .left {
     width: 25%;
@@ -36,12 +36,11 @@ html, body {
     outline: none;
 }
 
-/*
-.childElement.isHidden{
-    display: none;
+.mark{
+    border: 1px solid black;
+    background: #1fa5d5;
 }
-*/
 
-.active {
-    background-color: #3C93D5;
+.hidden{
+    display: none;
 }
