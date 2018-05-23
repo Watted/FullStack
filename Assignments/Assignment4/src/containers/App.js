@@ -10,8 +10,10 @@ class App extends Component {
     return (
       <div className="App">
           <Header/>
-          <LeftTree/>
-          <Right/>
+          <div className={"content"}>
+                <LeftTree/>
+                <Right/>
+          </div>
       </div>
     );
   }

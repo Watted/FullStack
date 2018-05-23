@@ -6,10 +6,10 @@ import TextInput from '../components/TextInput';
 
 
 
-class ToDoList extends Component {
+class ToDoList extends React.Component {
     render() {
         return (
-            <div>
+            <div className={"right"}>
                 <TextArea/>
                 <TextInput/>
                 <TextButton/>

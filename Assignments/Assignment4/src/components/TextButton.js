@@ -3,7 +3,7 @@ import * as React from 'react';
 
 const TextButton = () => {
     return (
-        <Button key={"button"} value={"Send"}></Button>
+        <input type={"Button"} key={"button"} value={"Send"}></input>
     );
 };
 

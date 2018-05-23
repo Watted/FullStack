@@ -1,13 +1,37 @@
 .App {
+  text-align: center;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   display: flex;
-  flex-direction: row;}
+  flex-direction: column;
+}
 
-.toolbar{
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.left {
+  width: 25%;
+  height: 100%;
+  background-color: #15B358;
+  border-right: 1px solid black;
+}
+
+.right {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
   border-bottom: 1px solid black;
   padding: 0.5em;
 }
+
+

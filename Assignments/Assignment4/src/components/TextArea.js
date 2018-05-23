@@ -3,7 +3,7 @@ import * as React from 'react';
 
 const TextArea = () => {
     return (
-        <textarea className="content"></textarea>
+        <textarea className="textArea"></textarea>
     );
 };
 
