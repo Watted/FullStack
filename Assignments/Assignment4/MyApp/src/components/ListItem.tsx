@@ -7,7 +7,7 @@ interface IListItem {
 const ListItem = (props: IListItem) => {
 
     return (
-        <ul className='left tree' tabIndex={0}>{props.label}</ul>
+        <li >{props.label}</li>
     );
 };
 
