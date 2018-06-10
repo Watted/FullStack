@@ -1,7 +1,6 @@
-import IGroup from './group';
-import {CreateANewId} from '../utils/CreateANewId';
-
-export default interface IUser {
+import IGroup from './Group';
+import {CreateANewId} from './CreateANewId';
+interface IUser {
     id:string,
     name:string,
     age?:number,
@@ -12,6 +11,7 @@ export default interface IUser {
     removeParent(parentNode:IGroup):boolean,
     auth(enteredPassword:string):boolean
 }
+
 
 export default class User implements IUser{
     public name:string;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ERROR_MSG} from "../containers/App";
-import {IMessage} from "../models/message";
+import {IMessage} from "../models/Message";
 import './FooterArea.css';
 interface IFooterAreaProps {
     data: {

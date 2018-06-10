@@ -5,8 +5,8 @@ import FooterArea from "../components/FooterArea";
 import './chat.css';
 import {ERROR_MSG} from "./App";
 import {stateStoreService} from "../state/StateStore";
-import {IMessage} from "../models/message";
-import {Message} from '../models/message';
+import {IMessage} from "../models/Message";
+import {Message} from '../models/Message';
 
 interface IChatState {
     selectedName? : string,

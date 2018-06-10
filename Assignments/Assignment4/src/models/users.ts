@@ -1,17 +1,16 @@
-import IUser from "./user";
-import User from "./user"
+import User from "./User"
 
 export interface IUsersDb {
     isUserExists(username:string):boolean,
     deleteUser(username:string):boolean,
-    addUser(user:IUser):void,
+    addUser(user:User):void,
     getUserNamesList():string[],
-    getUser(userName:string):IUser,
-    getUsers():IUser[]
+    getUser(userName:string):User,
+    getUsers():User[]
 }
 
 class UsersDb implements IUsersDb{
-    private users: IUser[];
+    private users: User[];
     constructor(){
         this.users = [new User("Mohammed", 25, "mohammed"),new User("Ofer", 27, "ofer"), new User("Tommy", 27, "tommy"), new User("Roni", 40, "roni"), new User("Ori", 38, "ori"), new User("Udi", 34, "udi")];
     }
@@ -38,7 +37,7 @@ class UsersDb implements IUsersDb{
         }
     }
 
-    public addUser(user:IUser){
+    public addUser(user:User){
         this.users.push(user);
     }
     public getUserNamesList(){

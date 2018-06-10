@@ -102,8 +102,10 @@ class Left extends React.Component<ILeftTreeProps, ILeftTreeState> {
     };
 
     public goToNext = (next:HTMLElement)=>{
-        next.focus();
-        this.props.getSelected(next);
+        if (next) {
+            next.focus();
+            this.props.getSelected(next);
+        }
     };
 
     public arrowRight = (element:HTMLElement)=>{

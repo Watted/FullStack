@@ -1,4 +1,4 @@
-import {CreateANewId} from '../utils/CreateANewId';
+import {CreateANewId} from './CreateANewId';
 
 export interface IMessage{
     message:string,
@@ -10,7 +10,6 @@ export interface IMessage{
 export class Message implements IMessage{
     public message:string;
     public date?:string;
-    public sender?:{name:string, id:string};
     public id:string;
 
     constructor(message:string, date:string){

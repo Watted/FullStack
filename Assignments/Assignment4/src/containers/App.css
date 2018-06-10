@@ -3,12 +3,13 @@
 }
 
 .switch{
-  height: 95%;
+  height: 90%;
   box-sizing: border-box;
 }
 .Left{
   float:left;
 }
+
 
 .Right{
   float:right;
@@ -16,7 +17,7 @@
 
 nav{
   min-width: fit-content;
-  height: 5%;
+  height: 10%;
   background-color: #a5b34a;
 }
 
@@ -25,11 +26,20 @@ nav{
   background: transparent;
   cursor: pointer;
   padding: 0.3em 0.6em;
-  color: #fafffb;
+  color: #000000;
+  background-color: #e6eae2;
   font-size: 1em;
-  margin-top: 0.2em;
+  margin-top: 1em;
   box-sizing: border-box;
   outline: none;
+}
+
+.logIn{
+  margin-left: 2em;
+}
+
+.logOut{
+  margin-right: 2em;
 }
 
 .logged-in-name{

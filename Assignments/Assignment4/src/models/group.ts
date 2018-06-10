@@ -1,7 +1,6 @@
-import User from './user';
-import IUser from './user';
-import {IMessage} from "../models/message";
-import {CreateANewId} from '../utils/CreateANewId';
+import User from './User';;
+import {IMessage} from "./Message";
+import {CreateANewId} from './CreateANewId';
 
 let i = 0;
 
@@ -15,71 +14,40 @@ export default interface IGroup{
     type:string;
     getParents() : IGroup[],
     isNodeExistInGroup(nodeId:string):boolean,
-    add(node:IGroup| IUser, parentNode?:IGroup):void,
-    search(nodeId:string|undefined): IUser|IGroup,
+    add(node:IGroup| User, parentNode?:IGroup):void,
+    search(nodeId:string|undefined): User|IGroup,
     removeGroup(node:IGroup):boolean,
     printFullTree():any[],
     getGroupsList():IGroup[]
 }
 
-export default class Group implements IGroup{
-    public array : any[] = [];
-    public id:string;
+export default class Group implements IGroup {
+    public array: any[] = [];
+    public id: string;
     public parent: IGroup;
     public name: string;
     public children: any[];
     public messages: IMessage[];
-    public type:string;
+    public type: string;
 
-    constructor(parent:IGroup, name:string, children:IGroup[]|IUser[]) {
+    constructor(parent: IGroup, name: string, children: IGroup[] | User[]) {
         this.parent = parent;
         this.name = name;
-        this.children = this.array.concat(children||[]);
+        this.children = this.array.concat(children || []);
         this.messages = [];
         this.id = CreateANewId.createNewId().toString();
         this.type = 'group';
     }
 
-    public flattening() {
-        let result:boolean = true;
-        const parent:IGroup = this.parent;
-        if(parent.children.length === 1) {
-            parent.children.length = 0;
-            if(this.children){
-                this.children.forEach((child)=>{
-                    parent.children.push(child);
-                    if(child instanceof User){
-                        const currentResult = child.removeParent(this);
-                        if(!currentResult){
-                            result = currentResult;
-                        }
-                        child.parents.push(parent);
-                    }
-                    else{
-                        (child as IGroup).parent = parent;
-                    }
-                });
-                return result;
-            }
-           return true;
-        }
-        else{
-            return false
-        }
-    }
 
-    public getChildrenParentToDetach(){
-        return this.walkAllChildrenAndGetParent(this, this.parent);
-    }
-
-    public walkAllChildrenAndGetParent(node:IGroup, parent:IGroup){
-        const childrenParent:any[] = [];
-        if(node.children){
-            node.children.forEach((child)=>{
-                if(child instanceof User){
-                    childrenParent.push({"user":child, "parent": node});
+    public walkAllChildrenAndGetParent(node: IGroup, parent: IGroup) {
+        const childrenParent: any[] = [];
+        if (node.children) {
+            node.children.forEach((child) => {
+                if (child instanceof User) {
+                    childrenParent.push({"user": child, "parent": node});
                 }
-                if((child as IGroup).children){
+                if ((child as IGroup).children) {
                     childrenParent.push(...this.walkAllChildrenAndGetParent(child, node));
                 }
             });
@@ -87,18 +55,15 @@ export default class Group implements IGroup{
         return childrenParent;
     }
 
-    public getNumberOfChildren(){
-        return this.walkChildren(this);
-    }
 
-    public walkChildren(node:any){
+    public walkChildren(node: any) {
         let allChildren = 0;
-        if(node.children){
-            node.children.forEach((child:any)=>{
-                if(child instanceof User){
+        if (node.children) {
+            node.children.forEach((child: any) => {
+                if (child instanceof User) {
                     allChildren += 1;
                 }
-                if(child.children){
+                if (child.children) {
                     allChildren += this.walkChildren(child);
                 }
             });
@@ -106,17 +71,17 @@ export default class Group implements IGroup{
         return allChildren;
     }
 
-    public printFullTree(){
+    public printFullTree() {
         return [...this.walkTree(this)]
     }
 
-    public walkTree(node:IGroup){
-        const allTree:any[] = [];
-        if(node.children){
-            node.children.forEach((child)=>{
+    public walkTree(node: IGroup) {
+        const allTree: any[] = [];
+        if (node.children) {
+            node.children.forEach((child) => {
                 const node = this.getDetails(child);
                 allTree.push(node);
-                if(child.children){
+                if (child.children) {
                     this.walkTree(child)
                 }
             });
@@ -125,30 +90,30 @@ export default class Group implements IGroup{
         return allTree;
     }
 
-    public getDetails(child:IUser|IGroup){
-        if(child instanceof Group){
-            const children:any[] = child.children.map((child)=>{
+    public getDetails(child: User | IGroup) {
+        if (child instanceof Group) {
+            const children: any[] = child.children.map((child) => {
                 return this.getDetails(child);
             });
-            return{
+            return {
                 id: child.id,
-                type:child.type,
-                name:child.name,
-                items:children
+                type: child.type,
+                name: child.name,
+                items: children
             }
         }
-        else{
-            return{
-                id:child.id,
-                type:child.type,
-                name:child.name,
+        else {
+            return {
+                id: child.id,
+                type: child.type,
+                name: child.name,
             }
         }
     }
 
-    public removeGroup(node:IGroup) {
-        const parent:IGroup = node.parent;
-        const groupIndex:number = parent.children.findIndex((child) => {
+    public removeGroup(node: IGroup) {
+        const parent: IGroup = node.parent;
+        const groupIndex: number = parent.children.findIndex((child) => {
             return child.name === node.name;
         });
         if (groupIndex !== -1) {
@@ -160,11 +125,11 @@ export default class Group implements IGroup{
         }
     }
 
-    public addNodeToSelectedGroup(parentGroup:IGroup, newNode: IGroup | IUser) {
-        const parentGroupChildren: IGroup[]| IUser[] = parentGroup.children;
+    public addNodeToSelectedGroup(parentGroup: IGroup, newNode: IGroup | User) {
+        const parentGroupChildren: IGroup[] | User[] = parentGroup.children;
         if (parentGroupChildren.length) {
-            const groupFirstChild: IGroup|IUser = parentGroupChildren[0];
-            if (groupFirstChild instanceof Group){
+            const groupFirstChild: IGroup | User = parentGroupChildren[0];
+            if (groupFirstChild instanceof Group) {
                 return this.addNodeToSelectedGroupWhenGroupChildrenAreGroups(parentGroupChildren, newNode, parentGroup);
             }
             else {
@@ -176,31 +141,31 @@ export default class Group implements IGroup{
         }
     }
 
-    public addNodeToSelectedGroupWhenGroupChildrenAreGroups(parentGroupChildren:IGroup[]|IUser[], newNode:IGroup | IUser, parentGroup:IGroup){
-        if(newNode instanceof Group) {
+    public addNodeToSelectedGroupWhenGroupChildrenAreGroups(parentGroupChildren: IGroup[] | User[], newNode: IGroup | User, parentGroup: IGroup) {
+        if (newNode instanceof Group) {
             (parentGroupChildren as IGroup[]).push(newNode);
             newNode.parent = parentGroup;
             return true;
         }
-        else{
+        else {
             return this.checkForOthersGroup(parentGroupChildren, newNode, parentGroup);
         }
     }
 
-    public checkForOthersGroup(groupChildren:IGroup[]|IUser[], newNode:IUser|IGroup, parentGroup:IGroup){
+    public checkForOthersGroup(groupChildren: IGroup[] | User[], newNode: User | IGroup, parentGroup: IGroup) {
         const groupOthers = parentGroup.others;
         if (groupOthers) {
-            if((groupOthers as IGroup).isNodeExistInGroup(newNode.id)){
+            if ((groupOthers as IGroup).isNodeExistInGroup(newNode.id)) {
                 return false;
             }
-            else{
+            else {
                 groupOthers.children.push(newNode);
                 (newNode as User).parents.push(groupOthers);
                 return true;
             }
         }
         else {
-            parentGroup.others = new Group(parentGroup, "others" + ++i, [newNode as IUser]);
+            parentGroup.others = new Group(parentGroup, "others" + ++i, [newNode as User]);
             (groupChildren as IGroup[]).push(parentGroup.others);
             (newNode as User).parents.push(parentGroup.others);
             return true;
@@ -208,12 +173,12 @@ export default class Group implements IGroup{
     }
 
 
-    public addNodeToSelectedGroupWhenGroupChildrenAreUsers(parentGroupChildren:IUser[]|IGroup[], newNode:IGroup|IUser, parentGroup:IGroup){
-        if(newNode instanceof User){
-            (parentGroupChildren as IUser[]).push(newNode);
+    public addNodeToSelectedGroupWhenGroupChildrenAreUsers(parentGroupChildren: User[] | IGroup[], newNode: IGroup | User, parentGroup: IGroup) {
+        if (newNode instanceof User) {
+            (parentGroupChildren as User[]).push(newNode);
             newNode.parents.push(parentGroup);
         }
-        else{
+        else {
             parentGroup.others = new Group(parentGroup, "others" + ++i, parentGroupChildren);
             parentGroupChildren.length = 0;
             (parentGroupChildren as IGroup[]).push(parentGroup.others, newNode as IGroup);
@@ -227,7 +192,7 @@ export default class Group implements IGroup{
         return true;
     }
 
-    public addNodeToSelectedGroupWhenGroupHasNoChildren(parentGroupChildren:IGroup[]|IUser[], newNode:IGroup|IUser, parentGroup:IGroup){
+    public addNodeToSelectedGroupWhenGroupHasNoChildren(parentGroupChildren: IGroup[] | User[], newNode: IGroup | User, parentGroup: IGroup) {
         (parentGroupChildren as any[]).push(newNode);
         if (newNode instanceof Group) {
             newNode.parent = parentGroup;
@@ -238,7 +203,7 @@ export default class Group implements IGroup{
         return true;
     }
 
-    public add(node:IGroup|IUser, parentNode:IGroup) {
+    public add(node: IGroup | User, parentNode: IGroup) {
         if (parentNode) {
             this.addNodeToSelectedGroup(parentNode, node);
         }
@@ -247,16 +212,12 @@ export default class Group implements IGroup{
         }
     }
 
-    public addUserToGroup(userNode:IUser) {
-        return this.addNodeToSelectedGroup(this, userNode)
-    }
 
-
-    public search(nodeId:string) {
+    public search(nodeId: string) {
         return this.internalSearchAll(this, nodeId);
     }
 
-    public internalSearchAll(node:IGroup, nodeId:string) : any{
+    public internalSearchAll(node: IGroup, nodeId: string): any {
         let result;
         if (node.children) {
             node.children.some((child) => {
@@ -264,9 +225,9 @@ export default class Group implements IGroup{
                     result = child;
                     return true;
                 }
-                if(child.children){
+                if (child.children) {
                     result = this.internalSearchAll(child, nodeId);
-                    if(result){
+                    if (result) {
                         return true;
                     }
                 }
@@ -276,23 +237,17 @@ export default class Group implements IGroup{
         return result;
     }
 
-    public myPath() {
-        const parents = this.getParents();
-        return parents.map((parent) => {
-            return parent.name;
-        });
-    }
 
     public getParents() {
-        const parents:IGroup[] = [this];
+        const parents: IGroup[] = [this];
         if (this.parent) {
             parents.unshift(...this.parent.getParents());
         }
         return parents;
     }
 
-    public isNodeExistInGroup(nodeId:string) {
-        const nodeIndex = this.children.findIndex((child:IGroup|IUser) => {
+    public isNodeExistInGroup(nodeId: string) {
+        const nodeIndex = this.children.findIndex((child: IGroup | User) => {
             return child.id === nodeId;
         });
         return nodeIndex !== -1;
@@ -302,14 +257,14 @@ export default class Group implements IGroup{
         return this.internalSearchAllGroups(this)
     }
 
-    public internalSearchAllGroups(node:IGroup) {
-        const results:IGroup[] = [];
+    public internalSearchAllGroups(node: IGroup) {
+        const results: IGroup[] = [];
         if (node.children) {
             node.children.forEach((child) => {
                 if (child instanceof Group) {
                     results.push(child);
                 }
-                if(child.children){
+                if (child.children) {
                     results.push(...this.internalSearchAllGroups(child));
                 }
             });
@@ -317,16 +272,4 @@ export default class Group implements IGroup{
         return results;
     }
 
-    public removeUserFromGroup(userName:string){
-        const userIndex = this.children.findIndex((child:IUser)=>{
-                    return child.name === userName
-                });
-        if(userIndex !== -1){
-            this.children.splice(userIndex ,1);
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 }

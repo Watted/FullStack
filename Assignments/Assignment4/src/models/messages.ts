@@ -1,4 +1,4 @@
-import {IMessage} from "../models/message";
+import {IMessage} from "./Message";
 
 export class MessagesDb{
     private messages:{};
