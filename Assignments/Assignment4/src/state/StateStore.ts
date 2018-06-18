@@ -1,11 +1,11 @@
-import {IUsersDb, usersDb} from "../models/users";
-import {nTree} from '../models/tree';
-import NTree from '../models/tree';
-import {IMessage} from "../models/message";
-import {messagesDb} from "../models/messages";
-import {MessagesDb} from '../models/messages';
-import User from "../models/user";
-import IGroup from "../models/group";
+import {IUsersDb, usersDb} from "../models/Users";
+import {tree} from '../models/TreeChat';
+import TreeChat from '../models/TreeChat';
+import {IMessage} from "../models/Message";
+import {messagesDb} from "../models/Messages";
+import {MessagesDb} from '../models/Messages';
+import User from "../models/User";
+import IGroup from "../models/Group";
 
 interface IStateStoreService {
     set(key: string, val: any): void,
@@ -109,14 +109,14 @@ export class StateStoreService implements IStateStoreService{
 
 interface IStateStore {
     users : IUsersDb,
-    tree:NTree,
+    tree:TreeChat,
     messagesDb:MessagesDb
 }
 
 
 class StateStore implements IStateStore {
     public users:IUsersDb = usersDb;
-    public tree:NTree = nTree;
+    public tree:TreeChat = tree;
     public messagesDb:MessagesDb = messagesDb;
 
     static instance: IStateStore;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './ListItems.css';
-import {IMessage} from "../models/message";
+import {IMessage} from "../models/Message";
 
 interface IListItems {
     className?:string,

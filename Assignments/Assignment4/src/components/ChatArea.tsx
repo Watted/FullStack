@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ListItems from "./ListItems";
 import './ChatArea.css';
-import {IMessage} from "../models/message";
+import {IMessage} from "../models/Message";
 
 interface IChatMessagesProps {
     messages:IMessage[]|undefined,
