@@ -1,4 +1,4 @@
-import Group from './group';
+import Group from './Group';
 import IGroup from './group';
 import IUser from "./user";
 import {usersDb} from "./users";
